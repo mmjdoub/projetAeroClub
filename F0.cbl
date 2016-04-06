@@ -2,6 +2,7 @@ IDENTIFICATION DIVISION.
 PROGRAM-ID. F0.
 DATA DIVISION.
 WORKING-STORAGE SECTION.
+77 CHOIX PIC X.
 01  WDATE.
    02  WANNEE PIC 99.
    02  WMOIS PIC 99.
@@ -159,7 +160,6 @@ SCREEN SECTION.
      05 LINE 03 COL 01 VALUE "Application de gestion Aeroclub".
      05 LINE 04 COL 01 VALUE "Liste des avions à réviser et des pilotes malades".
      05 LINE 05 COL 01 VALUE "******************".
-	 05 LINE 07 COL 01 VALUE "Liste des avions".
   
 PROCEDURE DIVISION.
 DEBUT.
@@ -170,9 +170,6 @@ AFFICHAGE.
    ACCEPT SCREEN-F0.
 
 AVIONS.
-
-	
-
 	MOVE "O" TO WS-ETATAV.
 	
 	EXEC SQL
@@ -199,8 +196,10 @@ AVIONS.
 	OPEN AVCUR
 	END-EXEC.
 	
+	DISPLAY "Liste des avions a reviser".
+	
 	EXEC SQL
-		FECTH STUCUR
+		FECTH AVCUR
 		INTO :WS-CODAV, WS-DESIGN, WS-RESCONTROL, WS-CPTINTER
 		DISPLAY  "Code avion : " WS-CODAV " Type avion " WS-DESIGN 
 		-" Résultat du dernier contrôle" WS-RESCONTROL " Compteur intermédiaire : " WS-CPTINTER  
@@ -241,6 +240,8 @@ PILOTES.
 	OPEN PILCUR
 	END-EXEC.
 	
+	DISPLAY "Liste des pilotes malades".
+	
 	EXEC SQL
 		FECTH STUCUR
 		INTO :WS-NOM, :WS-PRENOM, WS-DATEVISIT, WS-RESULTAT
@@ -250,6 +251,16 @@ PILOTES.
 	EXEC SQL
 	CLOSE PILCUR
 	END-EXEC.
+	
+EVALUATE-CHOIX.
+	IF CHOIX="m" OR CHOIX="M"
+		CALL "PAGE-ACCUEIL"
+	ELSE IF CHOIX="Q" OR CHOIX="q"
+		STOP RUN  
+	END-IF.
+	
+	
+	
 	
 FIN.
 	STOP RUN.

@@ -413,7 +413,7 @@ AS UPDATE PILOTES
 
 CREATE TABLE PILOTAGE 
 (
-   NUMETYPE             integer                        not null,
+   NUMETYPE             integer                        FOREIGN KEY REFERENCES AVION(NUMTYP),
    NUMPIL               integer                        FOREIGN KEY REFERENCES PILOTES(NUMPIL),
    DATEPILOTAGE         char(10)                       not null,
    DATCRE               char(8)                        not null,

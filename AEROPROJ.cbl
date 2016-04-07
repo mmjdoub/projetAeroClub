@@ -450,8 +450,8 @@ AS UPDATE PILOTAGE
 CREATE TABLE VISITES 
 (
    NUMVISIT             integer                        not null,
-   DATEVISIT            char(10)                       not null,
-   RESULTAT             char(1)                        not null,
+   DATEVISIT            char(10)                       null,
+   RESULTAT             char(1)                        null,
    CODOBJ               integer                        FOREIGN KEY REFERENCES PILOTES(NUMPIL),
    DATCRE               char(8)                        not null,
    DATMAJ				char(8)						   not null,

@@ -42,8 +42,7 @@
 
         DEBUT.
 
-        PERFORM AFFICHE-ACCUEIL.
-        PERFORM MENU.
+        PERFORM AFFICHE-ACCUEIL THRU MENU.
         
         AFFICHE-ACCUEIL.
 			DISPLAY DELETE-SCREEN.
@@ -84,6 +83,6 @@
             ELSE 
                 SUBTRACT I FROM 3 GIVING NB-ESSAI.
                 MOVE "ERREUR, NOMBRE DE TENTATIVES RESTANTES : " TO ERREURS
-                PERFORM AFFICHE-ACCUEIL THRU MENU.
+                PERFORM DEBUT.
         FIN.
            STOP RUN.

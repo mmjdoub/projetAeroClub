@@ -29,7 +29,6 @@ FILE-CONTROL.
 	ALTERNATE RECORD KEY IS NUMAV WITH DUPLICATES.
 	
 DATA DIVISION.
-
 WORKING-STORAGE SECTION.
 77 NUMVISIT PIC 9.
 77 NUMPIL PIC 9.
@@ -42,8 +41,6 @@ WORKING-STORAGE SECTION.
 01 PILTYP.
 	02 CODPIL PIC 9.
 	02 CODTYP PIC 9.
-
-
 **********************table adresse	
 CREATE TABLE ADRESSE 
 (
@@ -54,9 +51,9 @@ CREATE TABLE ADRESSE
    CODEPOSTAL           integer                        not null,
    VILLE                char(20)                       not null,
    PAYS                 char(20)                       not null,
-   DATCRE               char(8)                        not null,
-   DATMAJ				char(8)						   not null,
-   DATSUP				char(8)						   not null,
+   DATCRE               char(8),
+   DATMAJ				char(8),
+   DATSUP				char(8),
    USERID               integer                        not null,
    constraint PK_ADRESSE primary key (ADRESSEID));
    
@@ -67,7 +64,6 @@ AS UPDATE ADRESSE
    SET DATCRE = DATE()
 	   DATMAJ = DATE()
 	   UTIL = USERID;
-
 CREATE TRIGGER TRIG_ADR_UPD
 ON TABLE ADRESSE
 FOR UPDATE
@@ -82,15 +78,14 @@ AS UPDATE ADRESSE
    SET DATMAJ = DATE()
 	   DATSUP = DATE()
 	   UTIL = USERID;
-
 ***************************table etat avion	   
 CREATE TABLE ETAT_AVION 
 (
    NUMETATAV            char(1)                        not null,
    NOMETATAV            char(10)                       not null,
-   DATCRE               char(8)                        not null,
-   DATMAJ				char(8)						   not null,
-   DATSUP				char(8)						   not null,
+   DATCRE               char(8),
+   DATMAJ				char(8),
+   DATSUP				char(8),
    USERID               integer                        not null,
    constraint PK_ETAT_AVION primary key (NUMETATAV));
    
@@ -101,7 +96,6 @@ AS UPDATE ETAT_AVION
    SET DATCRE = DATE()
 	   DATMAJ = DATE()
 	   UTIL = USERID;
-
 CREATE TRIGGER TRIG_ETAV_UPD
 ON TABLE ETAT_AVION
 FOR UPDATE
@@ -116,17 +110,15 @@ AS UPDATE ETAT_AVION
    SET DATMAJ = DATE()
 	   DATSUP = DATE()
 	   UTIL = USERID;
-
-
 *********************table type
 CREATE TABLE TYPES 
 (
-   NUMTYP               integer                        not null,
+   NUMTYP               char(2)                        not null,
    DESIGN               char(20)                       not null,
    TARIF                float(4)                       not null,
-   DATCRE               char(8)                        not null,
-   DATMAJ				char(8)						   not null,
-   DATSUP				char(8)						   not null,
+   DATCRE               char(8),
+   DATMAJ				char(8),
+   DATSUP				char(8),
    USERID               integer                        not null,
    constraint PK_TYPES primary key (NUMTYP));
    
@@ -137,7 +129,6 @@ AS UPDATE TYPES
    SET DATCRE = DATE()
 	   DATMAJ = DATE()
 	   UTIL = USERID;
-
 CREATE TRIGGER TRIG_TYP_UPD
 ON TABLE TYPES 
 FOR UPDATE
@@ -152,8 +143,6 @@ AS UPDATE TYPES
    SET DATMAJ = DATE()
 	   DATSUP = DATE()
 	   UTIL = USERID;
-
-
 ******************table avion
 CREATE TABLE AVIONS 
 (
@@ -163,9 +152,9 @@ CREATE TABLE AVIONS
    CPTINTER             integer                        not null,
    INFOS                char(50)                       not null,
    ETATAV            	char(1)                        FOREIGN KEY REFERENCES ETAT_AVION(NUMETATAV),
-   DATCRE               char(8)                        not null,
-   DATMAJ				char(8)						   not null,
-   DATSUP				char(8)						   not null,
+   DATCRE               char(8),
+   DATMAJ				char(8),
+   DATSUP				char(8),
    USERID               integer                        not null,
    constraint PK_AVIONS primary key (CODAV));
    
@@ -176,7 +165,6 @@ AS UPDATE AVIONS
    SET DATCRE = DATE()
 	   DATMAJ = DATE()
 	   UTIL = USERID;
-
 CREATE TRIGGER TRIG_AVI_UPD
 ON TABLE AVIONS
 FOR UPDATE
@@ -191,15 +179,14 @@ AS UPDATE AVIONS
    SET DATMAJ = DATE()
 	   DATSUP = DATE()
 	   UTIL = USERID;
-
 ******************table civilité
 CREATE TABLE CIVILITE 
 (
    CIVID                integer                        not null,
    LIBELLE              char(20)                       not null,
-   DATCRE               char(8)                        not null,
-   DATMAJ				char(8)						   not null,
-   DATSUP				char(8)						   not null,
+   DATCRE               char(8),
+   DATMAJ				char(8),
+   DATSUP				char(8),
    USERID               integer                        not null,
    constraint PK_CIVILITE primary key (CIVID));
    
@@ -210,7 +197,6 @@ AS UPDATE CIVILITE
    SET DATCRE = DATE()
 	   DATMAJ = DATE()
 	   UTIL = USERID;
-
 CREATE TRIGGER TRIG_CIV_UPD
 ON TABLE CIVILITE
 FOR UPDATE
@@ -225,7 +211,6 @@ AS UPDATE CIVILITE
    SET DATMAJ = DATE()
 	   DATSUP = DATE()
 	   UTIL = USERID;
-
 ****************** table controle
 CREATE TABLE CONTROLES 
 (
@@ -233,9 +218,9 @@ CREATE TABLE CONTROLES
    NUMAVION				integer						   FOREIGN KEY REFERENCES AVIONS(CODAV),
    DATECONTROL          char(10)                       not null,
    RESCONTROL           integer                        not null,
-   DATCRE               char(8)                        not null,
-   DATMAJ				char(8)						   not null,
-   DATSUP				char(8)						   not null,
+   DATCRE               char(8),
+   DATMAJ				char(8),
+   DATSUP				char(8),
    USERID               integer                        not null,
    constraint PK_CONTROLES primary key (NUMCONTROL));
    
@@ -246,7 +231,6 @@ AS UPDATE CONTROLES
    SET DATCRE = DATE()
 	   DATMAJ = DATE()
 	   UTIL = USERID;
-
 CREATE TRIGGER TRIG_CONT_UPD
 ON TABLE CONTROLES
 FOR UPDATE
@@ -261,17 +245,14 @@ AS UPDATE CONTROLES
    SET DATMAJ = DATE()
 	   DATSUP = DATE()
 	   UTIL = USERID;
-
-
-
 ******************table etat-pilote-presence
 CREATE TABLE ETAT_PILOTE_PRESENCE 
 (
    NUMPRESENCE          char(1)                        not null,
    NOMPRESENCE          char(10)                       not null,
-   DATCRE               char(8)                        not null,
-   DATMAJ				char(8)						   not null,
-   DATSUP				char(8)						   not null,
+   DATCRE               char(8),
+   DATMAJ				char(8),
+   DATSUP				char(8),
    USERID               integer                        not null,
    constraint PK_ETAT_PILOTE_PRESENCE primary key (NUMPRESENCE));
    
@@ -282,7 +263,6 @@ AS UPDATE ETAT_PILOTE_PRESENCE
    SET DATCRE = DATE()
 	   DATMAJ = DATE()
 	   UTIL = USERID;
-
 CREATE TRIGGER TRIG_ETAPRES_UPD
 ON TABLE ETAT_PILOTE_PRESENCE 
 FOR UPDATE
@@ -297,16 +277,14 @@ AS UPDATE ETAT_PILOTE_PRESENCE
    SET DATMAJ = DATE()
 	   DATSUP = DATE()
 	   UTIL = USERID;
-
 ******************table pilote-santé
-
 CREATE TABLE ETAT_PILOTE_SANTE 
 (
    NUMSANTE             char(1)                        not null,
    NOMSANTE             char(10)                       not null,
-   DATCRE               char(8)                        not null,
-   DATMAJ				char(8)						   not null,
-   DATSUP				char(8)						   not null,
+   DATCRE               char(8),
+   DATMAJ				char(8),
+   DATSUP				char(8),
    USERID               integer                        not null,
    constraint PK_ETAT_PILOTE_SANTE primary key (NUMSANTE));
    
@@ -317,7 +295,6 @@ AS UPDATE ETAT_PILOTE_SANTE
    SET DATCRE = DATE()
 	   DATMAJ = DATE()
 	   UTIL = USERID;
-
 CREATE TRIGGER TRIG_ETASAN_UPD
 ON TABLE ETAT_PILOTE_SANTE 
 FOR UPDATE
@@ -332,18 +309,16 @@ AS UPDATE ETAT_PILOTE_SANTE
    SET DATMAJ = DATE()
 	   DATSUP = DATE()
 	   UTIL = USERID;
-
 ******************table etat pilote situation
 CREATE TABLE ETAT_PILOTE_SITUATION 
 (
    NUMSITUATION         char(1)                        not null,
    NOMSITUATION         char(10)                       not null,
-   DATCRE               char(8)                        not null,
-   DATMAJ				char(8)						   not null,
-   DATSUP				char(8)						   not null,
+   DATCRE               char(8),
+   DATMAJ				char(8),
+   DATSUP				char(8),
    USERID               integer                        not null,
    constraint PK_ETAT_PILOTE_SITUATION primary key (NUMSITUATION));
-
 CREATE TRIGGER TRIG_ETASIT_INS
 ON TABLE ETAT_PILOTE_SITUATION 
 FOR INSERT
@@ -351,7 +326,6 @@ AS UPDATE ETAT_PILOTE_SITUATION
    SET DATCRE = DATE()
 	   DATMAJ = DATE()
 	   UTIL = USERID;
-
 CREATE TRIGGER TRIG_ETASIT_UPD
 ON TABLE ETAT_PILOTE_SITUATION
 FOR UPDATE
@@ -366,9 +340,7 @@ AS UPDATE ETAT_PILOTE_SITUATION
    SET DATMAJ = DATE()
 	   DATSUP = DATE()
 	   UTIL = USERID;
-
 ******************TABLE PILOTES
-
 CREATE TABLE PILOTES 
 (
    NUMPIL               integer                        not null,
@@ -380,9 +352,9 @@ CREATE TABLE PILOTES
    ETAT_SANTE          	char(1)                        FOREIGN KEY REFERENCES ETAT_PILOTE_SANTE(NUMSANTE),
    ETAT_SIT          	char(1)                        FOREIGN KEY REFERENCES ETAT_PILOTE_SITUATION(NUMSITUATION),
    ETAT_PRES          	char(1)                        FOREIGN KEY REFERENCES ETAT_PILOTE_PRESENCE(NUMPRESENCE),
-   DATCRE               char(8)                        not null,
-   DATMAJ				char(8)						   not null,
-   DATSUP				char(8)						   not null,
+   DATCRE               char(8),
+   DATMAJ				char(8),
+   DATSUP				char(8),
    USERID               integer                        not null,
    constraint PK_PILOTES primary key (NUMPIL));
    
@@ -393,7 +365,6 @@ AS UPDATE PILOTES
    SET DATCRE = DATE()
 	   DATMAJ = DATE()
 	   UTIL = USERID;
-
 CREATE TRIGGER TRIG_PIL_UPD
 ON TABLE PILOTES 
 FOR UPDATE
@@ -408,17 +379,15 @@ AS UPDATE PILOTES
    SET DATMAJ = DATE()
 	   DATSUP = DATE()
 	   UTIL = USERID;
-
 ******************table pilotage
-
 CREATE TABLE PILOTAGE 
 (
    NUMETYPE             integer                        FOREIGN KEY REFERENCES AVION(NUMTYP),
    NUMPIL               integer                        FOREIGN KEY REFERENCES PILOTES(NUMPIL),
-   DATEPILOTAGE         char(10)                       not null,
-   DATCRE               char(8)                        not null,
-   DATMAJ				char(8)						   not null,
-   DATSUP				char(8)						   not null,
+   DATEPILOTAGE         char(10),                       
+   DATCRE               char(8),
+   DATMAJ				char(8),
+   DATSUP				char(8),
    USERID               integer                        not null,
    constraint PK_PILOTES primary key (NUMETYPE,NUMPIL,DATEPILOTAGE));
  
@@ -429,7 +398,6 @@ AS UPDATE PILOTAGE
    SET DATCRE = DATE()
 	   DATMAJ = DATE()
 	   UTIL = USERID;
-
 CREATE TRIGGER TRIG_PILOTAGE_UPD
 ON TABLE PILOTAGE 
 FOR UPDATE
@@ -444,19 +412,17 @@ AS UPDATE PILOTAGE
    SET DATMAJ = DATE()
 	   DATSUP = DATE()
 	   UTIL = USERID;
-
 *****************table visite
-
 CREATE TABLE VISITES 
 (
    NUMVISIT             integer                        not null,
-   DATEVISIT            char(10)                       null,
-   RESULTAT             char(1)                        null,
+   DATEVISIT            char(10),
+   RESULTAT             char(1),
    CODOBJ               integer                        FOREIGN KEY REFERENCES PILOTES(NUMPIL),
-   DATCRE               char(8)                        not null,
-   DATMAJ				char(8)						   not null,
-   DATSUP				char(8)						   not null,
-   USERID               integer                        not null,
+   DATCRE               char(8),
+   DATMAJ				char(8),
+   DATSUP				char(8),
+   USERID               integer,
    constraint PK_VISITES primary key (NUMVISIT));
    
 CREATE TRIGGER TRIG_VIS_INS
@@ -466,7 +432,6 @@ AS UPDATE VISITES
    SET DATCRE = DATE()
 	   DATMAJ = DATE()
 	   UTIL = USERID;
-
 CREATE TRIGGER TRIG_VIS_UPD
 ON TABLE VISITES 
 FOR UPDATE
@@ -481,7 +446,6 @@ AS UPDATE VISITES
    SET DATMAJ = DATE()
 	   DATSUP = DATE()
 	   UTIL = USERID;
-
 CREATE TABLE VOLS 
 (
    NUMVOL               integer                        not null,
@@ -493,9 +457,9 @@ CREATE TABLE VOLS
    ETATVOL              char(1)                        not null,
    NUMAV                integer                        FOREIGN KEY REFERENCES AVIONS(CODAV),
    NUMPIL               integer                        FOREIGN KEY REFERENCES PILOTES(NUMPIL),
-   DATCRE               char(8)                        not null,
-   DATMAJ				char(8)						   not null,
-   DATSUP				char(8)						   not null,
+   DATCRE               char(8),
+   DATMAJ				char(8),
+   DATSUP				char(8),
    USERID               integer                        not null,
    constraint PK_VOLS primary key (NUMVOL));
    
@@ -506,7 +470,6 @@ AS UPDATE VOLS
    SET DATCRE = DATE()
 	   DATMAJ = DATE()
 	   UTIL = USERID;
-
 CREATE TRIGGER TRIG_VOL_UPD
 ON TABLE VOLS 
 FOR UPDATE
@@ -521,11 +484,7 @@ AS UPDATE VOLS
    SET DATMAJ = DATE()
 	   DATSUP = DATE()
 	   UTIL = USERID;
-
-
 PROCEDURE DIVISION.
 PRINCIPAL SECTION.
-
-
 FIN.
 	STOP RUN.

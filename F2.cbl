@@ -84,9 +84,9 @@ SCREEN SECTION.
       05 LINE 03 COL 01 VALUE "Application de gestion Aeroclub".
       05 LINE 04 COL 01 VALUE "ENREGISTREMENT D'UN VOL".
       05 LINE 05 COL 01 VALUE "******************".
-	  05 LINE 07 COL 01 VALUE "Veuillez entrez votre numéro de pilote : "
+	  05 LINE 07 COL 01 VALUE "Veuillez entrez votre numéro de pilote : ".
 	  05 LINE 07 COL 42 PIC 9(3) TO WS-NUMPIL.
-	  05 LINE 08 COL 01 VALUE "Veuillez entrez le numéro de vol : "
+	  05 LINE 08 COL 01 VALUE "Veuillez entrez le numéro de vol : ".
 	  05 LINE 08 COL 36 PIC 9(3) TO WS-CODAV.
 	  05 LINE 09 COL 01 VALUE "Veuillez entrez une date de départ au format JJMMAAHHmm : " .
 	  05 LINE 09 COL 59 PIC X(10) TO WS-DATEDEB.
@@ -218,7 +218,8 @@ ERREURS-CHOIX.
         ELSE 
             SUBTRACT I FROM 3 GIVING NB-ESSAI
             MOVE "ERREUR, NOMBRE DE TENTATIVES RESTANTES : " TO ERREURS
-            PERFORM DEBUT.
+            PERFORM DEBUT
+		END-IF.
 	
 FIN.
 	STOP RUN.
